@@ -1,6 +1,5 @@
 package gr.aueb.moviesite.persistence;
 
-import gr.aueb.moviesite.model.Bookmark;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -40,7 +39,13 @@ public class MovieDaoImpl implements MovieDao {
      */
     @Override
     public boolean userExists(final String email) {
-        return false;
+        int result = 0; // The Default Result
+        try {
+            result = jdbcTemplate.queryForObject(getSQLQuery("USER_EXISTS"), new Object[] { email }, Integer.class);
+        } catch (Exception exception) {
+            log.error("Exception", exception);
+        }
+        return result > 0;
     }
 
     /**
@@ -50,7 +55,7 @@ public class MovieDaoImpl implements MovieDao {
     public int insertUser(final String name, final String email, final String password) {
         log.info("insertUser() Invoked For Name = {}.", name);
         try {
-            return jdbcTemplate.update(getSQLQuery("INSERT_USER"), new Object[] { name, email, password });
+            return jdbcTemplate.update(getSQLQuery("INSERT_USER"), name, email, password);
         } catch (DataAccessException exception) {
             log.error("Exception", exception);
             return 0;
@@ -64,7 +69,7 @@ public class MovieDaoImpl implements MovieDao {
     public int insertBookmark(final Long userId, final Long movieId) {
         log.info("insertBookmark() Invoked For User Id = {}.", userId);
         try {
-            return jdbcTemplate.update(getSQLQuery("INSERT_BOOKMARK"), new Object[] { userId, movieId});
+            return jdbcTemplate.update(getSQLQuery("INSERT_BOOKMARK"), userId, movieId);
         } catch (DataAccessException exception) {
             log.error("Exception", exception);
             return 0;
