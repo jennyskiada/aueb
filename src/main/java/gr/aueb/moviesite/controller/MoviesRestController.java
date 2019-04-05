@@ -33,7 +33,7 @@ public class MoviesRestController {
         return moviesService.checkUserExistence(user.getEmail(), user.getPassword());
     }
 
-    @PostMapping(value = "user", produces = "application/json")
+    @PostMapping(value = "insertUser", produces = "application/json")
     public void insertUser(@RequestBody User user) {
         log.info("insertUser() Endpoint Invoked For Email = {}.", user.getEmail());
         moviesService.insertUser(user);

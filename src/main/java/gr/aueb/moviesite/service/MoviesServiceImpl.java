@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class MoviesServiceImpl implements MoviesService {
 
     @Autowired
@@ -41,7 +41,6 @@ public class MoviesServiceImpl implements MoviesService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional(readOnly = true)
     public void insertUser(User user) {
         if(StringUtils.trimToNull(user.getEmail()) != null && StringUtils.trimToNull(user.getPassword()) != null) {
             movieDao.insertUser(user.getName(), user.getEmail(), user.getPassword());
@@ -52,7 +51,6 @@ public class MoviesServiceImpl implements MoviesService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional(readOnly = true)
     public void insertBookmark(final String email, final String movieId) {
         if(StringUtils.trimToNull(email) != null && StringUtils.trimToNull(movieId) != null) {
             movieDao.insertBookmark(email, movieId);
