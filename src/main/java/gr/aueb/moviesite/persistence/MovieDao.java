@@ -12,7 +12,7 @@ public interface MovieDao {
 
    int insertUser(String name, String email, String password);
 
-   int insertBookmark(Long userId, Long movieId);
+   int insertBookmark(String email, String movieId);
 
    List<String> getUserBookmarks(String email);
 }

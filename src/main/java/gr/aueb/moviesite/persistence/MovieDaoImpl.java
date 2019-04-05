@@ -66,10 +66,10 @@ public class MovieDaoImpl implements MovieDao {
      * {@inheritDoc}
      */
     @Override
-    public int insertBookmark(final Long userId, final Long movieId) {
-        log.info("insertBookmark() Invoked For User Id = {}.", userId);
+    public int insertBookmark(String email, String movieId) {
+        log.info("insertBookmark() Invoked For Email = {}.", email);
         try {
-            return jdbcTemplate.update(getSQLQuery("INSERT_BOOKMARK"), userId, movieId);
+            return jdbcTemplate.update(getSQLQuery("INSERT_BOOKMARK"), email, movieId);
         } catch (DataAccessException exception) {
             log.error("Exception", exception);
             return 0;

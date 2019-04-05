@@ -1,7 +1,8 @@
 package gr.aueb.moviesite.service;
 
 
-import java.util.List;
+import gr.aueb.moviesite.model.GetBookmarksResponse;
+import gr.aueb.moviesite.model.User;
 
 /**
  * Movies Service Interface
@@ -11,9 +12,9 @@ public interface MoviesService {
 
     boolean checkUserExistence(String email, String password);
 
-    void insertUser(String name, String email, String password);
+    void insertUser(User user);
 
-    void insertBookmark(Long userId, Long movieId);
+    void insertBookmark(String email, String movieId);
 
-    List<String> getUserBookmarksByEmail(String email);
+    GetBookmarksResponse getUserBookmarksByEmail(String email);
 }

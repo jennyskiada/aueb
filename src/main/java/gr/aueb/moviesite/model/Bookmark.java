@@ -11,5 +11,6 @@ public class Bookmark{
 
     private Long id;
     private Long userId;
+    private String email;
     private String movieId;
 }
