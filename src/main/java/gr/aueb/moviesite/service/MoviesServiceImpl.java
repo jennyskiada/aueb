@@ -27,6 +27,7 @@ public class MoviesServiceImpl implements MoviesService {
      */
     @Override
     public boolean checkUserExistence(final String email, final String password) {
+
         return false;
     }
 
@@ -34,6 +35,7 @@ public class MoviesServiceImpl implements MoviesService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public void insertUser(final String name, final String email, final String password) {
 
     }
@@ -42,6 +44,7 @@ public class MoviesServiceImpl implements MoviesService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public void insertBookmark(final Long userId, final Long movieId) {
 
     }
