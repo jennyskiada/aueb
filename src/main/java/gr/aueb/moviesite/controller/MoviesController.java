@@ -21,6 +21,12 @@ public class MoviesController {
     @Autowired
     private MoviesService moviesService;
 
+    @PostMapping(value = "login", produces = "application/json")
+    public boolean login(@RequestBody User user) {
+        log.info("login() Endpoint Invoked For Email = {}.", user.getEmail());
+        return moviesService.loginUser(user);
+    }
+
     @PostMapping(value = "userExists", produces = "application/json")
     public boolean userExists(@RequestBody User user) {
         log.info("userExists() Endpoint Invoked For Email = {}.", user.getEmail());

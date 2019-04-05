@@ -73,4 +73,15 @@ public class MoviesServiceImpl implements MoviesService {
         result.setBookmarks(bookmarks);
         return result;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean loginUser(final User user) {
+        if(StringUtils.trimToNull(user.getEmail()) != null && StringUtils.trimToNull(user.getPassword()) != null) {
+            return movieDao.login(user.getEmail(), user.getPassword());
+        }
+        return false;
+    }
 }

@@ -39,6 +39,7 @@ public class MovieDaoImpl implements MovieDao {
      */
     @Override
     public boolean userExists(final String email, final String password) {
+        log.info("userExists() Invoked For Email = {}.", email);
         int result = 0; // The Default Result
         try {
             result = jdbcTemplate.queryForObject(getSQLQuery("USER_EXISTS"), new Object[] { email, password }, Integer.class);
@@ -94,5 +95,20 @@ public class MovieDaoImpl implements MovieDao {
             log.error("Exception", exception);
         }
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean login(final String email, final String password) {
+        log.info("login() Invoked For Email = {}.", email);
+        int result = 0; // The Default Result
+        try {
+            result = jdbcTemplate.queryForObject(getSQLQuery("LOGIN_USER"), new Object[] { email, password }, Integer.class);
+        } catch (Exception exception) {
+            log.error("Exception", exception);
+        }
+        return result == 1;
     }
 }

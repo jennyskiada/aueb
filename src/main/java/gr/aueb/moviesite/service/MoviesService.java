@@ -17,4 +17,6 @@ public interface MoviesService {
     void insertBookmark(String email, String movieId);
 
     GetBookmarksResponse getUserBookmarksByEmail(String email);
+
+    boolean loginUser(User user);
 }
