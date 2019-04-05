@@ -38,10 +38,10 @@ public class MovieDaoImpl implements MovieDao {
      * {@inheritDoc}
      */
     @Override
-    public boolean userExists(final String email) {
+    public boolean userExists(final String email, final String password) {
         int result = 0; // The Default Result
         try {
-            result = jdbcTemplate.queryForObject(getSQLQuery("USER_EXISTS"), new Object[] { email }, Integer.class);
+            result = jdbcTemplate.queryForObject(getSQLQuery("USER_EXISTS"), new Object[] { email, password }, Integer.class);
         } catch (Exception exception) {
             log.error("Exception", exception);
         }

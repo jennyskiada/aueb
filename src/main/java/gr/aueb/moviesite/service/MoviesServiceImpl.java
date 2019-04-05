@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 /**
  * Movies Service Implementation
  * @author npapadopoulos, eskiada
@@ -17,14 +19,38 @@ import org.springframework.web.client.RestTemplate;
 @Transactional(readOnly = true)
 public class MoviesServiceImpl implements MoviesService {
 
-    @Value("${movie.api.url}")
-    private String apiUrl;
-    @Value("${movie.api.key}")
-    private String apiKey;
-
-    @Autowired
-    private RestTemplate restTemplate;
-
     @Autowired
     private MovieDao movieDao;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean checkUserExistence(final String email, final String password) {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void insertUser(final String name, final String email, final String password) {
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void insertBookmark(final Long userId, final Long movieId) {
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> getUserBookmarksByEmail(final String email) {
+        return null;
+    }
 }

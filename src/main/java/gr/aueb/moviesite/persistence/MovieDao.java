@@ -1,7 +1,5 @@
 package gr.aueb.moviesite.persistence;
 
-import gr.aueb.moviesite.model.Bookmark;
-
 import java.util.List;
 
 /**
@@ -10,7 +8,7 @@ import java.util.List;
  */
 public interface MovieDao {
 
-   boolean userExists(String email);
+   boolean userExists(String email, String password);
 
    int insertUser(String name, String email, String password);
 
