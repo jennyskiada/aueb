@@ -1,14 +1,20 @@
 package gr.aueb.moviesite.persistence;
 
+import gr.aueb.moviesite.model.Bookmark;
+
+import java.util.List;
+
 /**
  * Movie DAO Interface
  * @author eskiada
  */
 public interface MovieDao {
 
-    /**
-     * Perform A Query Against dual In Order To Check Database's Status
-     * @return 1 If Everything OK
-     */
-    Integer probeDatabase();
+   boolean userExists(String email);
+
+   int insertUser(String name, String email, String password);
+
+   int insertBookmark(Long userId, Long movieId);
+
+   List<Bookmark> getUserBookmarks(String email);
 }

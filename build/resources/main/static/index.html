@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- To "avoid" problem from a secure website to a non-secure -->
+    <title>The best Movie Database</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <h2>Which movie are you looking for?</h2>
+    <div id="searchicon">
+      <img src="media/searchicon.png" alt="Magnifying Glass">
+    </div>
+    <div id="searchmovie">
+      <form id="movie-form">
+        <input type="text" id="movie" class="search" placeholder="Movie Name" autocomplete="off">
+      </form>
+    </div>
+    <p></p>
+	  <div id="movieresults">
+		<!-- This Is A Container For The Results -->
+    </div>
+	  <footer>
+    This page exists for academic purposes only, but is fully functional and you can look up any movies you like, thanks to the <br><a href="http://www.omdbapi.com" style="color:green"><strong>Open Movie Database</strong></a><br>Powered by <a href="http://jquery.com/" style="color:green">jQuery</a> and <a href="https://lodash.com/" style="color:green">Lodash</a>
+    </footer>
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/lodash.js"></script>
+    <script src="scripts/main.js"></script>
+	   <!-- Short Results Template -->
+    <script id="short-result-template" type="text/x-lodash-template">
+		<img src="<%= poster %>" />
+		<div class="details">
+			<h3><%= title %></h3>
+      <p class="plot"><%= plot %></p>
+			<p><strong>Year</strong> <%= year %></p>
+			<p><strong>Runtime</strong> <%= runtime %></p>
+			<p><strong>Genre</strong> <%= genre %></p>
+			<p><strong>imdb Rating</strong> <%= rating %></p>
+      <p><strong>Rotten Tomatoes Rating</strong> <%= rotten %></p>
+      <p><strong>Metacritic Score</strong> <%= metacritic %></p>
+			<a class="more" href="#" data-value=<%= imdbid %> >View More</a> <br><br>
+
+		</div>
+	  </script>
+	   <!-- Full Results Template -->
+	  <script id="full-result-template" type="text/x-lodash-template">
+    <!--		<img src="<%= poster %>" /> -->
+		<div class="details">
+			<h3><%= title %></h3>
+			<p class="plot"><%= plot %></p>
+      <p><strong>Director(s)</strong> <%= director %></p>
+      <p><strong>Actors</strong> <%= actors %></p>
+      <p><strong>Awards</strong> <%= awards %></p>
+			<p><strong>Year</strong> <%= year %></p>
+			<p><strong>Runtime</strong> <%= runtime %></p>
+			<p><strong>Genre</strong> <%= genre %></p>
+			<p><strong>imdb Rating</strong> <%= rating %></p>
+      <p><strong>Rotten Tomatoes Rating</strong> <%= rotten %></p>
+      <p><strong>Metacritic Score</strong> <%= metacritic %></p> <br>
+
+		</div>
+    </script>
+  </body>
+</html>

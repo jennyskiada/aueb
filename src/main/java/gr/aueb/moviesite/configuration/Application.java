@@ -1,13 +1,13 @@
-package gr.aueb.moviesite;
+package gr.aueb.moviesite.configuration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MoviesiteApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MoviesiteApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
