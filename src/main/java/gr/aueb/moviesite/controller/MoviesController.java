@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MoviesController {
 
-    @GetMapping("/list")
+    @GetMapping("movies/list")
     public ModelAndView getMoviesPage(){
         ModelAndView modelAndView = new ModelAndView("movies.html");
         return modelAndView;

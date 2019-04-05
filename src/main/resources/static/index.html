@@ -9,32 +9,37 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     </head>
     <body>
-        Login Page
-        <h3>Login</h3>
-        <form id="login-form">
-            <label for="login-email">Email</label>
-            <input type="text" id="login-email" name="login-email" placeholder="Your Email" /><br />
-            <label for="login-password">Password</label>
-            <input type="password" id="login-password" name="login-password" placeholder="Your Password" /><br />
-            <input type="submit" id="login-button" value="Login" />
-        </form>
-        <div id="login-error"></div>
-        <a href="#">Register</a>
-
-        <h3>Register</h3>
-        <form id="register-form">
-            <label for="register-name">Name</label>
-            <input type="text" id="register-name" name="register-name" placeholder="Your Name" /><br />
-            <label for="register-email">Email</label>
-            <input type="text" id="register-email" name="register-email" placeholder="Your Email" /><br />
-            <label for="register-password">Password</label>
-            <input type="password" id="register-password" name="register-password" placeholder="Password" /><br />
-            <label for="register-confirm-password">Confirm Password</label>
-            <input type="password" id="register-confirm-password" name="register-confirm-password" placeholder="Confirm Password" /><br />
-            <input type="submit" id="register-button" value="Register" />
-        </form>
-        <div id="register-error"></div>
-
+        <div id="message-container"></div>
+        <!-- Login Form -->
+        <div id="login-container">
+            <h3>Login</h3>
+            <form id="login-form">
+                <label for="login-email">Email</label>
+                <input type="text" id="login-email" name="login-email" placeholder="Your Email" /><br />
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="login-password" placeholder="Your Password" /><br />
+                <input type="submit" id="login-button" value="Login" />
+            </form>
+            <div id="login-error"></div>
+            <a href="/?register=true">Register</a>
+        </div>
+        <!-- Register Form -->
+        <div id="register-container" class="hidden">
+            <h3>Register</h3>
+            <form id="register-form">
+                <label for="register-name">Name</label>
+                <input type="text" id="register-name" name="register-name" placeholder="Your Name" /><br />
+                <label for="register-email">Email</label>
+                <input type="text" id="register-email" name="register-email" placeholder="Your Email" /><br />
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" name="register-password" placeholder="Password" /><br />
+                <label for="register-confirm-password">Confirm Password</label>
+                <input type="password" id="register-confirm-password" name="register-confirm-password" placeholder="Confirm Password" /><br />
+                <input type="submit" id="register-button" value="Register" />
+            </form>
+            <div id="register-error"></div>
+        </div>
+        <!-- Scripts -->
         <script src="scripts/jquery.js"></script>
         <script src="scripts/login.js"></script>
     </body>

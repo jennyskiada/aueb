@@ -2,7 +2,52 @@ $(document).ready(function() {
 
     var url = location.protocol + '//' + location.host;
 
-    /* Login Form */
+    /**
+     * Validate The Given Email
+     * @param email Email Value
+     * @returns {boolean}
+     */
+    function isEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+    }
+
+    /**
+     * Function To Get URL Parameter [ https://stackoverflow.com/a/21903119 ]
+     * @param p Parameter Name
+     * @returns Parameter's Value
+     */
+    var getUrlParameter = function getUrlParameter(p) {
+        var sPageURL = window.location.search.substring(1), sURLVariables = sPageURL.split('&'), sParameterName, i;
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === p) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
+    /**
+     * Toggle The Forms Visibility Base On The 'register' Parameter
+     */
+    if(getUrlParameter('register')=='true') {
+        $("#login-container").addClass('hidden');
+        $("#register-container").removeClass('hidden');
+    } else {
+        $("#login-container").removeClass('hidden');
+        $("#register-container").addClass('hidden');
+    }
+
+    /**
+     * Show The Creation Success Message
+     */
+    if(getUrlParameter('created')=='true') {
+        $("#message-container").text("User Successfully Created.");
+    }
+
+    /**
+     * Login Form
+     */
     $("#login-form").submit(function () {
         return false;
     });
@@ -19,7 +64,7 @@ $(document).ready(function() {
                 data: JSON.stringify(obj),
                 success: function(result) {
                     if(result) { // Login Succeeded
-                        window.location.href = url + "/movies";
+                        window.location.href = url + "/movies/list?email=" + email;
                     } else { // Login Failed
                         $("#login-email").val('');
                         $("#login-password").val('');
@@ -31,11 +76,13 @@ $(document).ready(function() {
                 }
             });
         } else {
-            //TODO Not Valid
+            $("#login-error").text("Values Given Are Not Valid.");
         }
     });
 
-    /* Register Form*/
+    /**
+     * Register Form
+     */
     $("#register-form").submit(function () {
         return false;
     });
@@ -45,7 +92,7 @@ $(document).ready(function() {
         var email = $("#register-email").val();
         var password = $("#register-password").val();
         var confirmPassword = $("#register-confirm-password").val();
-        if(name!='' && email!='' && password!='' && password==confirmPassword) {
+        if(name!='' && isEmail(email) && password!='' && password==confirmPassword) {
             var obj = { name: name, email: email, password: password };
             $.ajax({
                 type: "POST",
@@ -53,17 +100,14 @@ $(document).ready(function() {
                 contentType: 'application/json',
                 data: JSON.stringify(obj),
                 success: function(result) {
-                    console.log("User Successfully Created.");
-                    window.location.href = url + "/movies/list?email=" + email;
+                    window.location.href = url + "?created=true";
                 },
                 error: function() {
                     //TODO Ajax Failed
                 }
             });
         } else {
-            //TODO Not Valid
+            $("#register-error").text("Values Given Are Not Valid.");
         }
     });
-
-
 });
