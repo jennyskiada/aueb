@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- To "avoid" problem from a secure website to a non-secure -->
-    <title>The best Movie Database</title>
-    <link href="styles/style.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-</head>
-<body>
-    Login Page
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- To "avoid" problem from a secure website to a non-secure -->
+        <title>The best Movie Database</title>
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        Login Page
+        <h3>Login</h3>
+        <form id="login-form">
+            <label for="login-email">Email</label>
+            <input id="login-email" name="login-email" placeholder="Your Email" />
+            <label for="login-password">Password</label>
+            <input id="login-password" name="login-password" placeholder="Your Password" />
+            <input type="submit" id="login-button" value="Login" />
+        </form>
+        <a href="#">Register</a>
+
+        <h3>Register</h3>
+        <form id="register-form">
+            <label for="register-name">Name</label>
+            <input id="register-name" name="register-name" placeholder="Your Name" />
+            <label for="register-email">Email</label>
+            <input id="register-email" name="register-email" placeholder="Your Email" />
+            <label for="register-password">Password</label>
+            <input id="register-password" name="register-password" placeholder="Password" />
+            <label for="register-confirm-password">Confirm Password</label>
+            <input id="register-confirm-password" name="register-confirm-password" placeholder="Confirm Password" />
+            <input type="submit" id="register-button" value="Register" />
+        </form>
+
+
+        <script src="scripts/jquery.js"></script>
+        <script src="scripts/login.js"></script>
+    </body>
 </html>
