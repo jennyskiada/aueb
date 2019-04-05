@@ -7,7 +7,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -73,8 +75,19 @@ public class MovieDaoImpl implements MovieDao {
      * {@inheritDoc}
      */
     @Override
-    public List<Bookmark> getUserBookmarks(final String email) {
-
-        return null;
+    public List<String> getUserBookmarks(final String email) {
+        log.info("getUserBookmarks() Invoked For GUID = {}", email);
+        List<String> result = new ArrayList<>();
+        try {
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(getSQLQuery("GET_USER_BOOKMARKS"), email);
+            for(Map<String, Object> row : rows) {
+                if(row.get("MOVIE_ID")!=null) {
+                    result.add((String) row.get("MOVIE_ID"));
+                }
+            }
+        } catch (DataAccessException exception) {
+            log.error("Exception", exception);
+        }
+        return result;
     }
 }

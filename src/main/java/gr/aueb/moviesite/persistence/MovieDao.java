@@ -16,5 +16,5 @@ public interface MovieDao {
 
    int insertBookmark(Long userId, Long movieId);
 
-   List<Bookmark> getUserBookmarks(String email);
+   List<String> getUserBookmarks(String email);
 }
