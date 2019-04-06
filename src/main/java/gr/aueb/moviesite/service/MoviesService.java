@@ -9,9 +9,11 @@ import gr.aueb.moviesite.model.User;
  */
 public interface MoviesService {
 
-    boolean checkUserExistence(User user);
+    boolean insertUser(User user);
 
-    void insertUser(User user);
+    boolean userExists(User user);
+
+    boolean userEmailExists(String email);
 
     boolean insertBookmark(Bookmark bookmark);
 

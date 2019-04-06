@@ -12,36 +12,39 @@
         <div id="message-container"></div>
         <!-- Login Form -->
         <div id="login-container">
-            <h3>Login</h3>
+            <h2>Login</h2>
+            <div class="login-error"></div>
             <form id="login-form">
-                <label for="login-email">Email</label>
-                <input type="text" id="login-email" name="login-email" placeholder="Your Email" /><br />
-                <label for="login-password">Password</label>
-                <input type="password" id="login-password" name="login-password" placeholder="Your Password" /><br />
+                <label for="login-email">Email</label><br />
+                <input type="text" id="login-email" name="login-email" placeholder="Your Email" autocomplete="false" /><br />
+                <label for="login-password">Password</label><br />
+                <input type="password" id="login-password" name="login-password" placeholder="Your Password" autocomplete="false" /><br />
                 <input type="submit" id="login-button" value="Login" />
             </form>
-            <div id="login-error"></div>
-            <a href="/?register=true">Register</a>
+            <a href="/movies/?register=true">Register</a>
         </div>
         <!-- Register Form -->
         <div id="register-container" class="hidden">
-            <h3>Register</h3>
+            <h2>Register</h2>
+            <div class="register-general-error"></div>
             <form id="register-form">
-                <label for="register-name">Name</label>
-                <input type="text" id="register-name" name="register-name" placeholder="Your Name" /><br />
-                <label for="register-email">Email</label>
-                <input type="text" id="register-email" name="register-email" placeholder="Your Email" /><br />
-                <label for="register-password">Password</label>
-                <input type="password" id="register-password" name="register-password" placeholder="Password" /><br />
-                <label for="register-confirm-password">Confirm Password</label>
-                <input type="password" id="register-confirm-password" name="register-confirm-password" placeholder="Confirm Password" /><br />
+                <label for="register-name">Name</label><br />
+                <input type="text" id="register-name" name="register-name" placeholder="Your Name" autocomplete="false" />
+                <span class="register-error name"></span><br />
+                <label for="register-email">Email</label><br />
+                <input type="text" id="register-email" name="register-email" placeholder="Your Email" autocomplete="false" />
+                <span class="register-error email"></span><br />
+                <label for="register-password">Password</label><br />
+                <input type="password" id="register-password" name="register-password" placeholder="Password" autocomplete="false" />
+                <span class="register-error password"></span><br />
+                <label for="register-confirm-password">Confirm Password</label><br />
+                <input type="password" id="register-confirm-password" name="register-confirm-password" placeholder="Confirm Password" autocomplete="false" />
+                <span class="register-error password"></span><br />
                 <input type="submit" id="register-button" value="Register" />
             </form>
-            <div id="register-error"></div>
         </div>
         <footer>
-            This page exists for academic purposes only, but is fully functional and you can look up any movies you like, thanks to the <br /><a href="http://www.omdbapi.com" style="color:green;"><strong>Open Movie Database</strong></a><br />
-            Powered by <a href="http://jquery.com/" style="color:green">jQuery</a> and <a href="https://lodash.com/" style="color:green;">Lodash</a>
+            This page exists for academic purposes only. You can look up any movies you like, thanks to the <a href="http://www.omdbapi.com" class="powered-by">Open Movie Database</a> Powered by <a href="https://spring.io/projects/spring-boot" class="powered-by">Spring Boot</a>, <a href="http://jquery.com/" class="powered-by">jQuery</a> and <a href="https://lodash.com/" class="powered-by">Lodash</a>
         </footer>
         <!-- Scripts -->
         <script src="scripts/jquery.js"></script>

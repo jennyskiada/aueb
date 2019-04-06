@@ -1,5 +1,7 @@
 package gr.aueb.moviesite.persistence;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,6 +17,8 @@ import java.util.ResourceBundle;
  */
 @Repository("GenericDao")
 public class MovieDaoImpl implements MovieDao {
+
+    Logger logger = LoggerFactory.getLogger(MovieDaoImpl.class);
 
     private final ResourceBundle SQL_BUNDLE = ResourceBundle.getBundle("bundles/sql");
 
@@ -34,34 +38,46 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public boolean userExists(String email, String password) {
-        //log.info("userExists() Invoked For Email = {}.", email);
+        logger.info("userExists() Invoked For Email = {}, Password = {}.", email, password);
         int result = 0; // The Default Result
         try {
             result = jdbcTemplate.queryForObject(getSQLQuery("USER_EXISTS"), new Object[] { email, password }, Integer.class);
         } catch (Exception exception) {
-            //log.error("Exception", exception);
+            logger.error("Exception", exception);
+        }
+        return result > 0;
+    }
+
+    @Override
+    public boolean userEmailExists(String email) {
+        logger.info("userEmailExists() Invoked For Email = {}.", email);
+        int result = 0; // The Default Result
+        try {
+            result = jdbcTemplate.queryForObject(getSQLQuery("USER_EMAIL_EXISTS"), new Object[] { email }, Integer.class);
+        } catch (Exception exception) {
+            logger.error("Exception", exception);
         }
         return result > 0;
     }
 
     @Override
     public int insertUser(String name, String email, String password) {
-        //log.info("insertUser() Invoked For Name = {}.", name);
+        logger.info("insertUser() Invoked For Name = {}.", name);
         try {
             return jdbcTemplate.update(getSQLQuery("INSERT_USER"), name, email, password);
         } catch (DataAccessException exception) {
-            //log.error("Exception", exception);
+            logger.error("Exception", exception);
             return 0;
         }
     }
 
     @Override
     public int insertBookmark(String email, String movieId) {
-        //log.info("insertBookmark() Invoked For Email = {}.", email);
+        logger.info("insertBookmark() Invoked For Email = {}.", email);
         try {
             return jdbcTemplate.update(getSQLQuery("INSERT_BOOKMARK"), email, movieId);
         } catch (DataAccessException exception) {
-            //log.error("Exception", exception);
+            logger.error("Exception", exception);
             return 0;
         }
     }
@@ -72,14 +88,14 @@ public class MovieDaoImpl implements MovieDao {
         try {
             result = jdbcTemplate.queryForObject(getSQLQuery("BOOKMARK_EXISTS"), new Object[] { email, movieId }, Integer.class);
         } catch (Exception exception) {
-            //log.error("Exception", exception);
+            logger.error("Exception", exception);
         }
         return result > 0;
     }
 
     @Override
     public List<String> getUserBookmarks(String email) {
-        //log.info("getUserBookmarks() Invoked For GUID = {}", email);
+        logger.info("getUserBookmarks() Invoked For GUID = {}", email);
         List<String> result = new ArrayList<>();
         try {
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(getSQLQuery("GET_USER_BOOKMARKS"), email);
@@ -89,7 +105,7 @@ public class MovieDaoImpl implements MovieDao {
                 }
             }
         } catch (DataAccessException exception) {
-            //log.error("Exception", exception);
+            logger.error("Exception", exception);
         }
         return result;
     }
@@ -100,7 +116,7 @@ public class MovieDaoImpl implements MovieDao {
         try {
             result = jdbcTemplate.queryForObject(getSQLQuery("GET_USER_NAME"), new Object[] { email }, String.class);
         } catch (Exception exception) {
-            //log.error("Exception", exception);
+            logger.error("Exception", exception);
         }
         return result;
     }

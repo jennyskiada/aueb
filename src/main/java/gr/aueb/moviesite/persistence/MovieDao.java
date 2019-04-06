@@ -9,6 +9,8 @@ public interface MovieDao {
 
    boolean userExists(String email, String password);
 
+   boolean userEmailExists(String email);
+
    int insertUser(String name, String email, String password);
 
    int insertBookmark(String email, String movieId);

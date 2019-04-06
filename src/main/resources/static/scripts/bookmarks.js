@@ -23,7 +23,7 @@ $(document).ready(function() {
                 }
             },
             error: function() {
-                //TODO Ajax Failed
+                console.log("Cannot Communicate With The Spring Application.");
             }
         });
     } else { // If No Email Is Given Redirect To Login Page

@@ -22,37 +22,42 @@ public class MoviesServiceImpl implements MoviesService {
     @Autowired
     private MovieDao movieDao;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public boolean checkUserExistence(User user) {
+    public boolean insertUser(User user) {
+        int affected = 0;
+        if(StringUtils.trimToNull(user.getEmail()) != null && StringUtils.trimToNull(user.getPassword()) != null) {
+            if(!userEmailExists(user.getEmail())) {
+                affected = movieDao.insertUser(user.getName(), user.getEmail(), user.getPassword());
+            }
+        }
+        return affected > 0;
+    }
+
+    @Override
+    public boolean userExists(User user) {
         if(StringUtils.trimToNull(user.getEmail()) != null && StringUtils.trimToNull(user.getPassword()) != null) {
             return movieDao.userExists(user.getEmail(), user.getPassword());
         }
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void insertUser(User user) {
-        if(StringUtils.trimToNull(user.getEmail()) != null && StringUtils.trimToNull(user.getPassword()) != null) {
-            movieDao.insertUser(user.getName(), user.getEmail(), user.getPassword());
+    public boolean userEmailExists(String email) {
+        if(StringUtils.trimToNull(email) != null) {
+            return movieDao.userEmailExists(email);
         }
+        return false;
     }
 
     @Override
     public boolean insertBookmark(Bookmark bookmark) {
-        boolean result = false;
+        int affected = 0;
         if(StringUtils.trimToNull(bookmark.getEmail())!=null && StringUtils.trimToNull(bookmark.getMovieId())!=null) {
             if(!bookmarkExists(bookmark)) {
-                movieDao.insertBookmark(bookmark.getEmail(), bookmark.getMovieId());
-                result = true; // Persisted
+                affected = movieDao.insertBookmark(bookmark.getEmail(), bookmark.getMovieId());
             }
         }
-        return result;
+        return affected > 0;
     }
 
     @Override

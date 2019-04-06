@@ -67,7 +67,7 @@ $(document).ready(function() {
                 $("#greetings").removeClass("hidden"); // Show The Header
             },
             error: function() {
-                //TODO Ajax Failed
+                console.log("Cannot Communicate With The Spring Application.");
             }
         });
     } else { // If No Email Is Given Redirect To Login Page
@@ -100,7 +100,7 @@ $(document).ready(function() {
                 }, 2000);
             },
             error: function() {
-                //TODO Ajax Failed
+                console.log("Cannot Communicate With The Spring Application.");
             }
         });
     });

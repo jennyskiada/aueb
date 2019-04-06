@@ -25,10 +25,10 @@ $(document).ready(function() {
         return false;
     });
     $(document).on('click', '#login-button', function() {
-        $("#login-error").text(""); // Clear Possible Previous Errors
+        $(".login-error").text(""); // Clear Possible Previous Errors
         var email = $("#login-email").val();
         var password = $("#login-password").val();
-        if(email!='' && password!='') {
+        if(email!==undefined && email!='' && password!==undefined && password!='') {
             var obj = { email: email, password: password };
             $.ajax({
                 type: "POST",
@@ -37,19 +37,19 @@ $(document).ready(function() {
                 data: JSON.stringify(obj),
                 success: function(result) {
                     if(result) { // Login Succeeded
-                        window.location.href = url + "/movies/search?email=" + email;
+                        window.location.href = appURL + "/search?email=" + email;
                     } else { // Login Failed
                         $("#login-email").val('');
                         $("#login-password").val('');
-                        $("#login-error").text("Invalid Credentials. Try Again.");
+                        $(".login-error").text("Invalid Credentials. Try Again.");
                     }
                 },
                 error: function() {
-                    //TODO Ajax Failed
+                    console.log("Cannot Communicate With The Spring Application.");
                 }
             });
         } else {
-            $("#login-error").text("Values Given Are Not Valid.");
+            $(".login-error").text("Values Given Are Not Valid.");
         }
     });
 
@@ -60,7 +60,9 @@ $(document).ready(function() {
         return false;
     });
     $(document).on('click', '#register-button', function() {
-        $("#register-error").text(""); // Clear Possible Previous Errors
+        $(".register-error").each(function() { // Clear Possible Previous Errors
+            $(this).text("");
+        });
         var name = $("#register-name").val();
         var email = $("#register-email").val();
         var password = $("#register-password").val();
@@ -73,14 +75,28 @@ $(document).ready(function() {
                 contentType: 'application/json',
                 data: JSON.stringify(obj),
                 success: function(result) {
-                    window.location.href = url + "?created=true";
+                    if(result) { // Persist Succeeded
+                        window.location.href = appURL + "?created=true";
+                    } else {
+                        $(".register-general-error").text("User Exists. Try A Different Email.");
+                    }
                 },
                 error: function() {
-                    //TODO Ajax Failed
+                    console.log("Cannot Communicate With The Spring Application.");
                 }
             });
-        } else {
-            $("#register-error").text("Values Given Are Not Valid.");
+        } else { // Error Handling
+            if(name=='') {
+                $(".register-error.name").text("The Name Cannot Be Empty.");
+            }
+            if(!isEmail(email)) {
+                $(".register-error.email").text("Email Is Not Valid.");
+            }
+            if(password=='' || (password!=confirmPassword)) {
+                $(".register-error.password").each(function() {
+                    $(this).text("The Passwords Do Not Match.");
+                });
+            }
         }
     });
 });

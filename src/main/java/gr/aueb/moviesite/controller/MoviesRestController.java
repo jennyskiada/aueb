@@ -4,16 +4,18 @@ import gr.aueb.moviesite.model.Bookmark;
 import gr.aueb.moviesite.model.UserBookmarks;
 import gr.aueb.moviesite.model.User;
 import gr.aueb.moviesite.service.MoviesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * Movies Controller Class
- * @author eskiada
  */
-//@Slf4j
 @RestController
 public class MoviesRestController {
+
+    Logger logger = LoggerFactory.getLogger(MoviesRestController.class);
 
     @Autowired
     private MoviesService moviesService;
@@ -25,8 +27,8 @@ public class MoviesRestController {
      */
     @PostMapping(value = "userExists", produces = "application/json")
     public boolean userExists(@RequestBody User user) {
-        //log.info("userExists() Endpoint Invoked For Email = {}.", user.getEmail());
-        return moviesService.checkUserExistence(user);
+        logger.info("userExists() Endpoint Invoked For Email = {}.", user.getEmail());
+        return moviesService.userExists(user);
     }
 
     /**
@@ -34,9 +36,9 @@ public class MoviesRestController {
      * @param user User Object
      */
     @PostMapping(value = "insertUser", produces = "application/json")
-    public void insertUser(@RequestBody User user) {
-        //log.info("insertUser() Endpoint Invoked For Email = {}.", user.getEmail());
-        moviesService.insertUser(user);
+    public boolean insertUser(@RequestBody User user) {
+        logger.info("insertUser() Endpoint Invoked For Email = {}.", user.getEmail());
+        return moviesService.insertUser(user);
     }
 
     /**
@@ -46,7 +48,7 @@ public class MoviesRestController {
      */
     @GetMapping(value = "userBookmarks", produces = "application/json")
     public UserBookmarks userBookmarks(@RequestParam(value = "email") String email) {
-        //log.info("getBookmarks() Endpoint Invoked For Email = {}.", email);
+        logger.info("getBookmarks() Endpoint Invoked For Email = {}.", email);
         return moviesService.getUserBookmarksByEmail(email);
     }
 
@@ -56,7 +58,7 @@ public class MoviesRestController {
      */
     @PostMapping(value = "insertBookmark", produces = "application/json")
     public boolean insertBookmark(@RequestBody Bookmark bookmark) {
-        //log.info("userExists() Endpoint Invoked For Email = {}.", bookmark.getEmail());
+        logger.info("userExists() Endpoint Invoked For Email = {}.", bookmark.getEmail());
         return moviesService.insertBookmark(bookmark);
     }
 }
