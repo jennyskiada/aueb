@@ -26,7 +26,7 @@ public class MoviesRestController {
     @PostMapping(value = "userExists", produces = "application/json")
     public boolean userExists(@RequestBody User user) {
         //log.info("userExists() Endpoint Invoked For Email = {}.", user.getEmail());
-        return moviesService.checkUserExistence(user.getEmail(), user.getPassword());
+        return moviesService.checkUserExistence(user);
     }
 
     /**
@@ -59,16 +59,4 @@ public class MoviesRestController {
         //log.info("userExists() Endpoint Invoked For Email = {}.", bookmark.getEmail());
         return moviesService.insertBookmark(bookmark);
     }
-
-
-
-
-    @PostMapping(value = "login", produces = "application/json")
-    public boolean login(@RequestBody User user) {
-        //log.info("login() Endpoint Invoked For Email = {}.", user.getEmail());
-        return moviesService.loginUser(user);
-    }
-
-
-
 }

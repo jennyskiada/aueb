@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 /**
  * Movie DAO Implementation
  */
-//@Slf4j
 @Repository("GenericDao")
 public class MovieDaoImpl implements MovieDao {
 
@@ -34,7 +33,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public boolean userExists(final String email, final String password) {
+    public boolean userExists(String email, String password) {
         //log.info("userExists() Invoked For Email = {}.", email);
         int result = 0; // The Default Result
         try {
@@ -46,7 +45,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public int insertUser(final String name, final String email, final String password) {
+    public int insertUser(String name, String email, String password) {
         //log.info("insertUser() Invoked For Name = {}.", name);
         try {
             return jdbcTemplate.update(getSQLQuery("INSERT_USER"), name, email, password);
@@ -79,7 +78,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public List<String> getUserBookmarks(final String email) {
+    public List<String> getUserBookmarks(String email) {
         //log.info("getUserBookmarks() Invoked For GUID = {}", email);
         List<String> result = new ArrayList<>();
         try {
@@ -96,19 +95,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public boolean login(final String email, final String password) {
-        //log.info("login() Invoked For Email = {}.", email);
-        int result = 0; // The Default Result
-        try {
-            result = jdbcTemplate.queryForObject(getSQLQuery("LOGIN_USER"), new Object[] { email, password }, Integer.class);
-        } catch (Exception exception) {
-            //log.error("Exception", exception);
-        }
-        return result == 1;
-    }
-
-    @Override
-    public String getUserName(final String email) {
+    public String getUserName(String email) {
         String result = null;
         try {
             result = jdbcTemplate.queryForObject(getSQLQuery("GET_USER_NAME"), new Object[] { email }, String.class);

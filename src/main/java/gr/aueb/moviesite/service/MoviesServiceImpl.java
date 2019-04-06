@@ -14,7 +14,6 @@ import java.util.List;
 
 /**
  * Movies Service Implementation
- * @author npapadopoulos, eskiada
  */
 @Service
 @Transactional
@@ -27,9 +26,9 @@ public class MoviesServiceImpl implements MoviesService {
      * {@inheritDoc}
      */
     @Override
-    public boolean checkUserExistence(final String email, final String password) {
-        if(StringUtils.trimToNull(email) != null && StringUtils.trimToNull(password) != null) {
-            return movieDao.userExists(email, password);
+    public boolean checkUserExistence(User user) {
+        if(StringUtils.trimToNull(user.getEmail()) != null && StringUtils.trimToNull(user.getPassword()) != null) {
+            return movieDao.userExists(user.getEmail(), user.getPassword());
         }
         return false;
     }
@@ -65,11 +64,8 @@ public class MoviesServiceImpl implements MoviesService {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public UserBookmarks getUserBookmarksByEmail(final String email) {
+    public UserBookmarks getUserBookmarksByEmail(String email) {
         UserBookmarks result = new UserBookmarks();
         result.setEmail(email);
         // Get User's Name
@@ -81,16 +77,5 @@ public class MoviesServiceImpl implements MoviesService {
         }
         result.setBookmarks(bookmarks);
         return result;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean loginUser(final User user) {
-        if(StringUtils.trimToNull(user.getEmail()) != null && StringUtils.trimToNull(user.getPassword()) != null) {
-            return movieDao.login(user.getEmail(), user.getPassword());
-        }
-        return false;
     }
 }

@@ -1,7 +1,7 @@
 html {
-  font-size: 15px;
-  font-family: 'Open Sans', sans-serif;
-  height:100vh; /* To make sure it also works Full Screen on mobiles and remove scroll bar at the beginning*/
+    font-size: 15px;
+    font-family: 'Open Sans', sans-serif;
+    height:100vh; /* To make sure it also works Full Screen on mobiles and remove scroll bar at the beginning*/
 }
 body {
     background: radial-gradient(circle, #404040, #1a1a1a);
@@ -22,7 +22,7 @@ header#greetings .user-name {
     font-weight: bold;
 }
 header#greetings a {
-  color: white;
+    color: white;
 }
 .save-result {
     font-size: 10px;
@@ -36,7 +36,7 @@ header#greetings a {
 
 h2 {
 	font-size: 50px;
-  text-align: center;
+    text-align: center;
 	margin: 0 0 5vh 0;
 	padding: 20px 0;
 }

@@ -17,7 +17,5 @@ public interface MovieDao {
 
    List<String> getUserBookmarks(String email);
 
-   boolean login(String email, String password);
-
-   String getUserName(final String email);
+   String getUserName(String email);
 }
