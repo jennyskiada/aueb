@@ -60,8 +60,8 @@ $(document).ready(function() {
             success: function(result) {
                 console.log(result);
                 $("#greetings .user-name").text(result.name);
-                if(result.bookmarks.length>0) {
-                    $("#greetings .user-bookmarks a").attr('href', '/movies/bookmarks?email=' + result.email);
+                $("#greetings .user-bookmarks a").attr('href', '/movies/bookmarks?email=' + result.email);
+                if(result.bookmarks.length>0) { // Show The Bookmarks Link
                     $("#greetings .user-bookmarks").removeClass('hidden');
                 }
                 $("#greetings").removeClass("hidden"); // Show The Header
@@ -89,6 +89,7 @@ $(document).ready(function() {
                 var message;
                 if(result) { // Bookmark Saved
                     message = "Bookmark Saved.";
+                    $("#greetings .user-bookmarks").removeClass('hidden'); // The Bookmarks Link Will Be Hidden For A New User
                 } else {
                     message = "Bookmark Already Exists.";
                 }
