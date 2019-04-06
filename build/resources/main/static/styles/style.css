@@ -68,6 +68,10 @@ input {
 input[type=submit] {
     margin-top: 20px;
 }
+#message-container {
+    text-align: center;
+    padding: 10px 0;
+}
 #searchicon img {
     display: block;
     margin: 20px auto 0;

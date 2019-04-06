@@ -38,7 +38,7 @@
         <script src="scripts/search.js"></script>
         <!-- Short Results Template -->
         <script id="short-result-template" type="text/x-lodash-template">
-            <img src="<%= poster %>" />
+            <img src="<%= poster %>" onerror="this.src='media/posternotfound.png'" />
             <div class="details">
                 <h3><%= title %></h3>
                 <p class="plot"><%= plot %></p>
