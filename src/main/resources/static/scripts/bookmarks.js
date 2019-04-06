@@ -29,5 +29,4 @@ $(document).ready(function() {
     } else { // If No Email Is Given Redirect To Login Page
         window.location.href = appURL;
     }
-
 });

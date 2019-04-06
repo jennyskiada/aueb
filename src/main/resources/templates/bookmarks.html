@@ -39,5 +39,19 @@
                 <a class="more" href="#" data-value=<%= imdbid %> >View More</a>
             </div>
         </script>
+        <!-- Full Results Template -->
+        <script id="full-result-template" type="text/x-lodash-template">
+            <h3><%= title %></h3>
+            <p class="plot"><%= plot %></p>
+            <p><strong>Director(s)</strong> <%= director %></p>
+            <p><strong>Actors</strong> <%= actors %></p>
+            <p><strong>Awards</strong> <%= awards %></p>
+            <p><strong>Year</strong> <%= year %></p>
+            <p><strong>Runtime</strong> <%= runtime %></p>
+            <p><strong>Genre</strong> <%= genre %></p>
+            <p><strong>imdb Rating</strong> <%= rating %></p>
+            <p><strong>Rotten Tomatoes Rating</strong> <%= rotten %></p>
+            <p><strong>Metacritic Score</strong> <%= metacritic %></p><br />
+        </script>
     </body>
 </html>
