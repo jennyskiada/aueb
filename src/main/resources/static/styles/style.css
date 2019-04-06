@@ -28,87 +28,69 @@ header#greetings a {
     font-size: 10px;
     font-weight: bold;
 }
-
-
-
-
-
-
 h2 {
 	font-size: 50px;
     text-align: center;
 	margin: 0 0 5vh 0;
 	padding: 20px 0;
 }
-
 #searchicon img{
-  display: block;
-  margin: 20px auto 0;
-  width: 70px;
-  height: 70px;
+    display: block;
+    margin: 20px auto 0;
+    width: 70px;
+    height: 70px;
 }
-
-#searchicon img:hover{
-  cursor:pointer;
+#searchicon img:hover {
+    cursor:pointer;
 }
-
-#searchmovie{
-  display: none;
-  margin: 20px auto 0;
-  text-align: center;
-  height: 70px; /* To have same height as the predecesor element before it disappears, in order to prevent distorting */
+#searchmovie {
+    display: none;
+    margin: 20px auto 0;
+    text-align: center;
+    height: 70px; /* To have same height as the predecesor element before it disappears, in order to prevent distorting */
 }
-
 input#movie {
 	height: 37px;
-  width: 20vw;
-  line-height: 37px;
-  border-radius: 50px;
-  padding: 0 10px 0 10px;
+    width: 20vw;
+    line-height: 37px;
+    border-radius: 50px;
+    padding: 0 10px 0 10px;
 }
-
-#movieresults{
-  display: none;
-  margin: 10vh 25vw;
-  background-color: #f2f2f2;
-  color: black;
-  border-style: solid;
-  border-width: 1px;
-  padding: 3vh 2vh;
-  flex-wrap: wrap;
+#movieresults   {
+    display: none;
+    margin: 10vh 25vw;
+    background-color: #f2f2f2;
+    color: black;
+    border-style: solid;
+    border-width: 1px;
+    padding: 3vh 2vh;
+    flex-wrap: wrap;
 }
-
-
 #movieresults img {
-  flex-shrink: 0;
-  flex-basis: 16;
-  max-width: 16%;
-  display: block;
-  object-fit: contain;
-  align-self: flex-start;
+    flex-shrink: 0;
+    flex-basis: 16%;
+    max-width: 16%;
+    display: block;
+    object-fit: contain;
+    align-self: flex-start;
 }
-
 #movieresults .details {
 	margin-left: 5%;
-  flex-basis: 70%;
+    flex-basis: 70%;
 	padding: 0 5px;
-  text-align: justify;
+    text-align: justify;
 }
-
 #movieresults  h3 {
 	margin: 0 0 1vh 0;
 }
-
 #movieresults  p {
 	margin: 2px 0 2px 0;
 	font-size: 14px;
 }
-
 #movieresults  p.plot {
-  font-size: 12px;
-  line-height: 18px;
+    font-size: 12px;
+    line-height: 18px;
 }
-
 #movieresults  a.more, #movieresults  a.save {
     background-color: red;
     padding: 5px 10px;
@@ -122,13 +104,11 @@ input#movie {
 #movieresults  a.save {
     background-color: blue;
 }
-
 p, li, form {
   font-size: 16px;
   line-height: 2;
   letter-spacing: 1px;
 }
-
 footer {
   position: relative;
   top: 45vh;

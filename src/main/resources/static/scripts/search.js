@@ -2,7 +2,6 @@ $(document).ready(function() {
 
     var email = getUrlParameter('email');
 
-    //TODO Why Do We Need This?
     $("#searchicon img").click(function() { // Just add some nice effect to hide the Magnifying Glass and show the search bar on Click!!
         $("#searchicon").hide();
         $("#searchmovie").fadeIn(750);
