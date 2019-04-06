@@ -37,7 +37,10 @@ function constructUrl(full) {
     }
 }
 
-//TODO
+/**
+ * Construct A List Of Movies In Short Description Given A List Of IDs
+ * @param ids List Of IDs
+ */
 function shortResultsList(ids) {
     var shortResultTemplate = document.getElementById("short-result-template").innerHTML;
     // Create Template Function

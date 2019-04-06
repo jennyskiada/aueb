@@ -3,17 +3,37 @@ html {
   font-family: 'Open Sans', sans-serif;
   height:100vh; /* To make sure it also works Full Screen on mobiles and remove scroll bar at the beginning*/
 }
-
 body {
-  background: radial-gradient(circle, #404040, #1a1a1a);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  color: white;
-  box-sizing:border-box;
+    background: radial-gradient(circle, #404040, #1a1a1a);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    box-sizing:border-box;
+    margin:0;
 }
 .hidden {
     display: none;
 }
+header#greetings {
+    padding: 10px;
+    background-color: cadetblue;
+}
+header#greetings .user-name {
+    font-weight: bold;
+}
+header#greetings a {
+  color: white;
+}
+.save-result {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+
+
+
+
+
 h2 {
 	font-size: 50px;
   text-align: center;

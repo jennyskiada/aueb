@@ -11,13 +11,13 @@ $(document).ready(function() {
             url: "/movies/userBookmarks?email=" + email,
             contentType: 'application/json',
             success: function(result) {
+                // Handle The Header Values
+                $("#greetings .user-name").text(result.name);
+                $("#greetings a").attr('href', '/movies/search?email=' + result.email);
+                $("#greetings").removeClass("hidden"); // Show The Header
+                // Fetch Bookmarks Via REST Call To API
                 if(result.bookmarks.length>0) {
-                    console.log(result.bookmarks);
                     shortResultsList(result.bookmarks);
-
-
-
-
                 } else { // If No Bookmarks Exist Redirect To Search Page
                     window.location.href = appURL + "/search?email=" + email;
                 }

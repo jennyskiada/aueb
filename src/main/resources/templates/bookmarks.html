@@ -9,13 +9,16 @@
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     </head>
     <body>
-        Bookmarks
-
+        <header id="greetings" class="hidden">
+            Hello <span class="user-name"></span>.
+            <span>
+                You Can Search For Movies <a href="#">here</a>.
+            </span>
+        </header>
+        <h2>Bookmarks</h2>
         <div id="movieresults">
             <!-- This Is A Container For The Results -->
         </div>
-
-
         <footer>
             This page exists for academic purposes only, but is fully functional and you can look up any movies you like, thanks to the <br /><a href="http://www.omdbapi.com" style="color:green;"><strong>Open Movie Database</strong></a><br />
             Powered by <a href="http://jquery.com/" style="color:green">jQuery</a> and <a href="https://lodash.com/" style="color:green;">Lodash</a>
@@ -34,7 +37,6 @@
                 <p><strong>Year</strong> <%= year %></p>
                 <p><strong>Runtime</strong> <%= runtime %></p>
                 <a class="more" href="#" data-value=<%= imdbid %> >View More</a>
-                <a class="save" href="#" data-value=<%= imdbid %> >Bookmark</a>
             </div>
         </script>
     </body>

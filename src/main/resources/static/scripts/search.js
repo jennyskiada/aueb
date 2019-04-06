@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+    var email = getUrlParameter('email');
+
+    //TODO
     $("#searchicon img").click(function() { // Just add some nice effect to hide the Magnifying Glass and show the search bar on Click!!
         $("#searchicon").hide();
         $("#searchmovie").fadeIn(750);
@@ -9,10 +12,9 @@ $(document).ready(function() {
         return false;
 	});
 
-
-
-
-	// Detect End Of Typing And When Done Search The API
+    /**
+     * Detect End Of Typing And When Done Search The API
+     */
     var typingTimer;
     $("#movie").keyup(function() { // On keyup Start The Countdown
         clearTimeout(typingTimer);
@@ -69,7 +71,7 @@ $(document).ready(function() {
         var fullResultTemplate = document.getElementById("full-result-template").innerHTML;
 		// Create Template Function
         var templateFn = _.template(fullResultTemplate);
-        var resultTemplate = document.querySelector("[data-value='"+imdbtt+"']").parentElement; // find the div that has the matchind imdb id value that the user clicked by getting the data value element of the a.more and get its parent element
+        var resultTemplate = document.querySelector("[data-value='" + imdbtt + "']").parentElement; // find the div that has the matchind imdb id value that the user clicked by getting the data value element of the a.more and get its parent element
         var url = apiURL + '?apikey=' + apiKey + '&i=' + imdbtt + '&plot=full';
         fetch(url).then(function(response) {
             return response.json();
@@ -113,10 +115,10 @@ $(document).ready(function() {
     /**
      * Handle The Header's Values
      */
-    if(getUrlParameter('email')!='') {
+    if(email!== undefined && email!='') {
         $.ajax({
             type: "GET",
-            url: "/movies/userBookmarks?email=" + getUrlParameter('email'),
+            url: "/movies/userBookmarks?email=" + email,
             contentType: 'application/json',
             success: function(result) {
                 console.log(result);
@@ -131,8 +133,8 @@ $(document).ready(function() {
                 //TODO Ajax Failed
             }
         });
-    } else {
-        //TODO Redirect To An Error Page
+    } else { // If No Email Is Given Redirect To Login Page
+        window.location.href = appURL;
     }
 
     /**
@@ -140,22 +142,25 @@ $(document).ready(function() {
      */
     $(document).on('click', 'a.save', function(event) {
         event.preventDefault(); // Deactivate The href Value
-        var obj = { email: getUrlParameter('email'), movieId: $(this).data('value') };
+        var obj = { email: email, movieId: $(this).data('value') };
         $.ajax({
             type: "POST",
             url: "/movies/insertBookmark",
             contentType: 'application/json',
             data: JSON.stringify(obj),
             success: function(result) {
+                var message;
                 if(result) { // Bookmark Saved
-                    //TODO Message
-                    console.log("Saved");
-                    //$("<span>Bookmark Saved.</span>").insertAfter($(this));
+                    message = "Bookmark Saved.";
                 } else {
-                    //TODO Message
-                    console.log("Already Exists");
-                    //$("<span>Bookmark Already Exists.</span>").insertAfter($(this));
+                    message = "Bookmark Already Exists.";
                 }
+                // Append A Message Informing About The Result And Remove It After 2 Seconds
+                var container = $("a[data-value=" + obj.movieId +"]").parent('div');
+                container.append("<span class='save-result'>" + message + "</span>")
+                setTimeout(function() {
+                    container.find($('.save-result')).remove();
+                }, 2000);
             },
             error: function() {
                 //TODO Ajax Failed
