@@ -28,9 +28,9 @@ repositories {
 
 dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.19'
 	compile 'org.springframework.boot:spring-boot-starter-jdbc'
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
 	runtime 'mysql:mysql-connector-java'
-	compileOnly 'org.projectlombok:lombok'
-	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

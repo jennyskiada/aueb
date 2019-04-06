@@ -1,6 +1,5 @@
 package gr.aueb.moviesite.persistence;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,7 +13,7 @@ import java.util.ResourceBundle;
 /**
  * Movie DAO Implementation
  */
-@Slf4j
+//@Slf4j
 @Repository("GenericDao")
 public class MovieDaoImpl implements MovieDao {
 
@@ -39,12 +38,12 @@ public class MovieDaoImpl implements MovieDao {
      */
     @Override
     public boolean userExists(final String email, final String password) {
-        log.info("userExists() Invoked For Email = {}.", email);
+        //log.info("userExists() Invoked For Email = {}.", email);
         int result = 0; // The Default Result
         try {
             result = jdbcTemplate.queryForObject(getSQLQuery("USER_EXISTS"), new Object[] { email, password }, Integer.class);
         } catch (Exception exception) {
-            log.error("Exception", exception);
+            //log.error("Exception", exception);
         }
         return result > 0;
     }
@@ -54,11 +53,11 @@ public class MovieDaoImpl implements MovieDao {
      */
     @Override
     public int insertUser(final String name, final String email, final String password) {
-        log.info("insertUser() Invoked For Name = {}.", name);
+        //log.info("insertUser() Invoked For Name = {}.", name);
         try {
             return jdbcTemplate.update(getSQLQuery("INSERT_USER"), name, email, password);
         } catch (DataAccessException exception) {
-            log.error("Exception", exception);
+            //log.error("Exception", exception);
             return 0;
         }
     }
@@ -68,11 +67,11 @@ public class MovieDaoImpl implements MovieDao {
      */
     @Override
     public int insertBookmark(String email, String movieId) {
-        log.info("insertBookmark() Invoked For Email = {}.", email);
+        //log.info("insertBookmark() Invoked For Email = {}.", email);
         try {
             return jdbcTemplate.update(getSQLQuery("INSERT_BOOKMARK"), email, movieId);
         } catch (DataAccessException exception) {
-            log.error("Exception", exception);
+            //log.error("Exception", exception);
             return 0;
         }
     }
@@ -82,7 +81,7 @@ public class MovieDaoImpl implements MovieDao {
      */
     @Override
     public List<String> getUserBookmarks(final String email) {
-        log.info("getUserBookmarks() Invoked For GUID = {}", email);
+        //log.info("getUserBookmarks() Invoked For GUID = {}", email);
         List<String> result = new ArrayList<>();
         try {
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(getSQLQuery("GET_USER_BOOKMARKS"), email);
@@ -92,7 +91,7 @@ public class MovieDaoImpl implements MovieDao {
                 }
             }
         } catch (DataAccessException exception) {
-            log.error("Exception", exception);
+            //log.error("Exception", exception);
         }
         return result;
     }
@@ -102,12 +101,12 @@ public class MovieDaoImpl implements MovieDao {
      */
     @Override
     public boolean login(final String email, final String password) {
-        log.info("login() Invoked For Email = {}.", email);
+        //log.info("login() Invoked For Email = {}.", email);
         int result = 0; // The Default Result
         try {
             result = jdbcTemplate.queryForObject(getSQLQuery("LOGIN_USER"), new Object[] { email, password }, Integer.class);
         } catch (Exception exception) {
-            log.error("Exception", exception);
+            //log.error("Exception", exception);
         }
         return result == 1;
     }

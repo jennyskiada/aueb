@@ -64,7 +64,7 @@ $(document).ready(function() {
                 data: JSON.stringify(obj),
                 success: function(result) {
                     if(result) { // Login Succeeded
-                        window.location.href = url + "/movies/list?email=" + email;
+                        window.location.href = url + "/movies/search?email=" + email;
                     } else { // Login Failed
                         $("#login-email").val('');
                         $("#login-password").val('');

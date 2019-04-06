@@ -3,13 +3,10 @@ package gr.aueb.moviesite.service;
 import gr.aueb.moviesite.model.GetBookmarksResponse;
 import gr.aueb.moviesite.model.User;
 import gr.aueb.moviesite.persistence.MovieDao;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,6 @@ import java.util.List;
  * Movies Service Implementation
  * @author npapadopoulos, eskiada
  */
-@Slf4j
 @Service
 @Transactional
 public class MoviesServiceImpl implements MoviesService {
