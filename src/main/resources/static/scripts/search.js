@@ -47,78 +47,34 @@ $(document).ready(function() {
             var url = constructUrl(full);
             fetch(url).then(function(response) {
                 return response.json();
-            }).then(function(movieData){
-                console.log(movieData)
-                if(!results){ // only apply the first time a movie is searched for
-                    var results = true;
-                    $("#movieresults").css("display", "flex"); // Show result container and make it flexbox to accommodate cases of images overflowing low text reults
-                    $("footer").css("top", "10vh"); // Adjust footer's positioning for better visuals
-                }
-                if(movieData["Response"]=="False") {
+            }).then(function(movies){
+                if(movies["Response"]=="False") {
                     errorResult('not-found');
                     return;
                 }
-                // Display The Full Results Template
-                shortResult(movieData);
+                // Based On The Returned Results Construct A List Of IDs
+                var ids = [];
+                _.forEach(movies.Search, function(movie) {
+                    ids.push(movie.imdbID);
+                });
+                shortResultsList(ids);
              }).catch(function(error) {
                 errorResult('exception');
             });
         }
     }
 
-	/**
-	 * Short Results Template
-	 */
-    function shortResult(movie) {
-        var shortResultTemplate = document.getElementById("short-result-template").innerHTML;
-
-		// Create Template Function
-        var templateFn = _.template(shortResultTemplate);
-        var resultTemplate = document.getElementById("movieresults");
-
-		// Execute Template Function
-        _.forEach(movie.Search, function(movieitem, key) {
-            var url = apiURL + '?apikey=' + apiKey + '&i=' + movieitem.imdbID;
-            //console.log(url,key)
-
-            fetch(url).then(function(response) {
-                return response.json();
-            }).then(function(movie){
-                //console.log(damovieData)
-                var templateHTML = templateFn({
-                    'title' : movie["Title"],
-                    'plot': movie["Plot"],
-                    'poster': movie["Poster"],
-                    'year': movie["Year"],
-                    'runtime': movie["Runtime"],
-                    'genre': movie["Genre"],
-                    'rating': movie["imdbRating"],
-                    'rotten': _.get(movie, "Ratings[1].Value"),
-                    'metacritic': movie["Metascore"],
-                    'imdbid': movie["imdbID"]
-                });
-                resultTemplate.innerHTML += templateHTML;
-            });
-        });
-    }
-
-	/**
-	 * Short Results Template
-	 */
-    function fullResult(damovieData) {
+    //TODO
+    function fullResult(movie) {
         var fullResultTemplate = document.getElementById("full-result-template").innerHTML;
-
 		// Create Template Function
         var templateFn = _.template(fullResultTemplate);
-        var resultTemplate = document.querySelector("[data-value='"+imdbtt+"']").parentElement // find the div that has the matchind imdb id value that the user clicked by getting the data value element of the a.more and get its parent element
+        var resultTemplate = document.querySelector("[data-value='"+imdbtt+"']").parentElement; // find the div that has the matchind imdb id value that the user clicked by getting the data value element of the a.more and get its parent element
         var url = apiURL + '?apikey=' + apiKey + '&i=' + imdbtt + '&plot=full';
-
         fetch(url).then(function(response) {
             return response.json();
         }).then(function(movie){
-
-		    // Execute Template Function
-            var templateHTML = templateFn({
+            var templateHTML = templateFn({ // Execute Template Function
                 'title' : movie["Title"],
                 'plot': movie["Plot"],
                 'poster': movie["Poster"],

@@ -10,12 +10,32 @@
     </head>
     <body>
         Bookmarks
+
+        <div id="movieresults">
+            <!-- This Is A Container For The Results -->
+        </div>
+
+
         <footer>
             This page exists for academic purposes only, but is fully functional and you can look up any movies you like, thanks to the <br /><a href="http://www.omdbapi.com" style="color:green;"><strong>Open Movie Database</strong></a><br />
             Powered by <a href="http://jquery.com/" style="color:green">jQuery</a> and <a href="https://lodash.com/" style="color:green;">Lodash</a>
         </footer>
         <!-- Scripts -->
         <script src="scripts/jquery.js"></script>
+        <script src="scripts/lodash.js"></script>
+        <script src="scripts/utils.js"></script>
         <script src="scripts/bookmarks.js"></script>
+        <!-- Short Results Template -->
+        <script id="short-result-template" type="text/x-lodash-template">
+            <img src="<%= poster %>" />
+            <div class="details">
+                <h3><%= title %></h3>
+                <p class="plot"><%= plot %></p>
+                <p><strong>Year</strong> <%= year %></p>
+                <p><strong>Runtime</strong> <%= runtime %></p>
+                <a class="more" href="#" data-value=<%= imdbid %> >View More</a>
+                <a class="save" href="#" data-value=<%= imdbid %> >Bookmark</a>
+            </div>
+        </script>
     </body>
 </html>

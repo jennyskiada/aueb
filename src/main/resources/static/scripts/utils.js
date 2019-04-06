@@ -1,16 +1,6 @@
-const appURL = location.protocol + '//' + location.host;
+const appURL = location.protocol + '//' + location.host + '/movies';
 const apiURL = "http://www.omdbapi.com/";
 const apiKey = '6a819847';
-
-/**
- * Construct The API's URL (For Full Or Short Plot)
- */
-function constructUrl(full) {
-    if(!full){
-        var url = apiURL + '?apikey=' + apiKey + '&s=' + $("#movie").val();
-        return url;
-    }
-}
 
 /**
  * Validate The Given Email
@@ -36,3 +26,39 @@ var getUrlParameter = function getUrlParameter(p) {
         }
     }
 };
+
+/**
+ * Construct The API's URL (For Full Or Short Plot)
+ */
+function constructUrl(full) {
+    if(!full){
+        var url = apiURL + '?apikey=' + apiKey + '&s=' + $("#movie").val();
+        return url;
+    }
+}
+
+//TODO
+function shortResultsList(ids) {
+    var shortResultTemplate = document.getElementById("short-result-template").innerHTML;
+    // Create Template Function
+    var templateFn = _.template(shortResultTemplate);
+    var resultTemplate = document.getElementById("movieresults");
+    _.forEach(ids, function(id) { // Execute Template Function
+        var url = apiURL + '?apikey=' + apiKey + '&i=' + id; //TODO Construct The URL
+        fetch(url).then(function(response) {
+            return response.json();
+        }).then(function(movie){
+            var templateHTML = templateFn({
+                'poster': movie["Poster"],
+                'title' : movie["Title"],
+                'plot': movie["Plot"],
+                'year': movie["Year"],
+                'runtime': movie["Runtime"],
+                'imdbid': movie["imdbID"]
+            });
+            resultTemplate.innerHTML += templateHTML; // Append The Movie
+            $("#movieresults").css("display", "flex"); // Show result container and make it flexbox to accommodate cases of images overflowing low text reults
+            $("footer").css("top", "10vh"); // Adjust footer's positioning for better visuals
+        });
+    });
+}
