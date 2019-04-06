@@ -1,7 +1,7 @@
 package gr.aueb.moviesite.controller;
 
 import gr.aueb.moviesite.model.Bookmark;
-import gr.aueb.moviesite.model.GetBookmarksResponse;
+import gr.aueb.moviesite.model.UserBookmarks;
 import gr.aueb.moviesite.model.User;
 import gr.aueb.moviesite.service.MoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +39,11 @@ public class MoviesRestController {
         moviesService.insertUser(user);
     }
 
-
-
-
+    @GetMapping(value = "userBookmarks", produces = "application/json")
+    public UserBookmarks userBookmarks(@RequestParam(value = "email") String email) {
+        //log.info("getBookmarks() Endpoint Invoked For Email = {}.", email);
+        return moviesService.getUserBookmarksByEmail(email);
+    }
 
 
 
@@ -59,9 +61,5 @@ public class MoviesRestController {
         moviesService.insertBookmark(bookmark.getEmail(), bookmark.getMovieId());
     }
 
-    @GetMapping(value = "bookmarks", produces = "application/json")
-    public GetBookmarksResponse getBookmarks(@PathVariable (value = "email") String email) {
-        //log.info("getBookmarks() Endpoint Invoked For Email = {}.", email);
-        return moviesService.getUserBookmarksByEmail(email);
-    }
+
 }

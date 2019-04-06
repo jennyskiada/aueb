@@ -1,6 +1,6 @@
 package gr.aueb.moviesite.service;
 
-import gr.aueb.moviesite.model.GetBookmarksResponse;
+import gr.aueb.moviesite.model.UserBookmarks;
 import gr.aueb.moviesite.model.User;
 import gr.aueb.moviesite.persistence.MovieDao;
 import org.apache.commons.lang3.StringUtils;
@@ -57,13 +57,16 @@ public class MoviesServiceImpl implements MoviesService {
      * {@inheritDoc}
      */
     @Override
-    public GetBookmarksResponse getUserBookmarksByEmail(final String email) {
-        GetBookmarksResponse result = new GetBookmarksResponse();
+    public UserBookmarks getUserBookmarksByEmail(final String email) {
+        UserBookmarks result = new UserBookmarks();
+        result.setEmail(email);
+        // Get User's Name
+        result.setName(movieDao.getUserName(email));
+        // Get User's Bookmark
         List bookmarks = new ArrayList();
         if(StringUtils.trimToNull(email) != null) {
             bookmarks = movieDao.getUserBookmarks(email);
         }
-        result.setEmail(email);
         result.setBookmarks(bookmarks);
         return result;
     }

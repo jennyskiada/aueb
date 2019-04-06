@@ -1,7 +1,7 @@
 package gr.aueb.moviesite.service;
 
 
-import gr.aueb.moviesite.model.GetBookmarksResponse;
+import gr.aueb.moviesite.model.UserBookmarks;
 import gr.aueb.moviesite.model.User;
 
 /**
@@ -16,7 +16,7 @@ public interface MoviesService {
 
     void insertBookmark(String email, String movieId);
 
-    GetBookmarksResponse getUserBookmarksByEmail(String email);
+    UserBookmarks getUserBookmarksByEmail(String email);
 
     boolean loginUser(User user);
 }

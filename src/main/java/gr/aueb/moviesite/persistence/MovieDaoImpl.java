@@ -33,9 +33,6 @@ public class MovieDaoImpl implements MovieDao {
         return SQL_BUNDLE.containsKey(key)? SQL_BUNDLE.getString(key) : null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean userExists(final String email, final String password) {
         //log.info("userExists() Invoked For Email = {}.", email);
@@ -48,9 +45,6 @@ public class MovieDaoImpl implements MovieDao {
         return result > 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int insertUser(final String name, final String email, final String password) {
         //log.info("insertUser() Invoked For Name = {}.", name);
@@ -62,9 +56,6 @@ public class MovieDaoImpl implements MovieDao {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int insertBookmark(String email, String movieId) {
         //log.info("insertBookmark() Invoked For Email = {}.", email);
@@ -76,9 +67,6 @@ public class MovieDaoImpl implements MovieDao {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<String> getUserBookmarks(final String email) {
         //log.info("getUserBookmarks() Invoked For GUID = {}", email);
@@ -96,9 +84,6 @@ public class MovieDaoImpl implements MovieDao {
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean login(final String email, final String password) {
         //log.info("login() Invoked For Email = {}.", email);
@@ -109,5 +94,16 @@ public class MovieDaoImpl implements MovieDao {
             //log.error("Exception", exception);
         }
         return result == 1;
+    }
+
+    @Override
+    public String getUserName(final String email) {
+        String result = null;
+        try {
+            result = jdbcTemplate.queryForObject(getSQLQuery("GET_USER_NAME"), new Object[] { email }, String.class);
+        } catch (Exception exception) {
+            //log.error("Exception", exception);
+        }
+        return result;
     }
 }

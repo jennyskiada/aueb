@@ -1,7 +1,7 @@
 package gr.aueb.moviesite.model;
 
 /**
- * Bookmark Model Object
+ * Bookmark Object
  */
 public class Bookmark{
 

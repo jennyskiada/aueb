@@ -155,4 +155,12 @@ $(document).ready(function() {
             $("#movieresults").html('An Error Occurred. Try Again Later.');
         }
     }
+
+
+
+
+
+
+
+
 });

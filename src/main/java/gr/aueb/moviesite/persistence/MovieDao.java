@@ -4,7 +4,6 @@ import java.util.List;
 
 /**
  * Movie DAO Interface
- * @author eskiada
  */
 public interface MovieDao {
 
@@ -17,4 +16,6 @@ public interface MovieDao {
    List<String> getUserBookmarks(String email);
 
    boolean login(String email, String password);
+
+   String getUserName(final String email);
 }

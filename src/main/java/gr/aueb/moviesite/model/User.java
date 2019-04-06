@@ -1,7 +1,7 @@
 package gr.aueb.moviesite.model;
 
 /**
- * User Model Object
+ * User Object
  */
 public class User {
 
