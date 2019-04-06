@@ -9,35 +9,37 @@ $(document).ready(function() {
         return false;
 	});
 
-	// Detect End Of Typing
+
+
+
+	// Detect End Of Typing And When Done Search The API
     var typingTimer;
-	// On keyup Start The Countdown
-    $("#movie").keyup(function() {
+    $("#movie").keyup(function() { // On keyup Start The Countdown
         clearTimeout(typingTimer);
         if ($("#movie").val()) {
             typingTimer = setTimeout(doneTyping, 1000);
         }
     });
-
     function doneTyping () {
         document.getElementById("movieresults").innerHTML = ""; // clear previous results
         fetchMovie(false); // false = 'Short Description'
     }
 
+
+
+
+
+
     var imdbtt
     $(document).on('click', 'a.more', function(event) {
         event.preventDefault(); // Deactivate The href Value
-        var mid = $(this)
-        imdbtt = mid.data('value')
+        imdbtt = $(this).data('value');
         fetchMovie(true); // true = 'Full Description'
     });
 
 	/**
 	 * Fetch Short Or Full Movie From The API
 	 */
-    const apiKey = '6a819847'
-    const apiURL = "http://www.omdbapi.com/"
-
     function fetchMovie(full) {
         if(full){
             fullResult(movie)
@@ -65,16 +67,6 @@ $(document).ready(function() {
     }
 
 	/**
-	 * Construct The API's URL (For Full Or Short Plot)
-	 */
-    function constructUrl(full) {
-        if(!full){
-            var url = apiURL + '?apikey=' + apiKey + '&s=' + $("#movie").val();
-            return url;
-        }
-    }
-
-	/**
 	 * Short Results Template
 	 */
     function shortResult(movie) {
@@ -85,25 +77,25 @@ $(document).ready(function() {
         var resultTemplate = document.getElementById("movieresults");
 
 		// Execute Template Function
-        _.forEach(movie.Search, function(movieitem,key) {
-            url = apiURL + '?apikey=' + apiKey + '&i=' + movieitem.imdbID;
-            console.log(url,key)
+        _.forEach(movie.Search, function(movieitem, key) {
+            var url = apiURL + '?apikey=' + apiKey + '&i=' + movieitem.imdbID;
+            //console.log(url,key)
 
             fetch(url).then(function(response) {
                 return response.json();
-            }).then(function(damovieData){
-                console.log(damovieData)
+            }).then(function(movie){
+                //console.log(damovieData)
                 var templateHTML = templateFn({
-                    'title' : damovieData["Title"],
-                    'plot': damovieData["Plot"],
-                    'poster': damovieData["Poster"],
-                    'year': damovieData["Year"],
-                    'runtime': damovieData["Runtime"],
-                    'genre': damovieData["Genre"],
-                    'rating': damovieData["imdbRating"],
-                    'rotten': _.get(damovieData, "Ratings[1].Value"),
-                    'metacritic': damovieData["Metascore"],
-                    'imdbid': damovieData["imdbID"]
+                    'title' : movie["Title"],
+                    'plot': movie["Plot"],
+                    'poster': movie["Poster"],
+                    'year': movie["Year"],
+                    'runtime': movie["Runtime"],
+                    'genre': movie["Genre"],
+                    'rating': movie["imdbRating"],
+                    'rotten': _.get(movie, "Ratings[1].Value"),
+                    'metacritic': movie["Metascore"],
+                    'imdbid': movie["imdbID"]
                 });
                 resultTemplate.innerHTML += templateHTML;
             });
@@ -119,7 +111,7 @@ $(document).ready(function() {
 		// Create Template Function
         var templateFn = _.template(fullResultTemplate);
         var resultTemplate = document.querySelector("[data-value='"+imdbtt+"']").parentElement // find the div that has the matchind imdb id value that the user clicked by getting the data value element of the a.more and get its parent element
-        url = apiURL + '?apikey=' + apiKey + '&i=' + imdbtt + '&plot=full';
+        var url = apiURL + '?apikey=' + apiKey + '&i=' + imdbtt + '&plot=full';
 
         fetch(url).then(function(response) {
             return response.json();
@@ -161,6 +153,59 @@ $(document).ready(function() {
 
 
 
+
+    /**
+     * Handle The Header's Values
+     */
+    if(getUrlParameter('email')!='') {
+        $.ajax({
+            type: "GET",
+            url: "/movies/userBookmarks?email=" + getUrlParameter('email'),
+            contentType: 'application/json',
+            success: function(result) {
+                console.log(result);
+                $("#greetings .user-name").text(result.name);
+                if(result.bookmarks.length>0) {
+                    $("#greetings .user-bookmarks a").attr('href', '/movies/bookmarks?email=' + result.email);
+                    $("#greetings .user-bookmarks").removeClass('hidden');
+                }
+                $("#greetings").removeClass("hidden"); // Show The Header
+            },
+            error: function() {
+                //TODO Ajax Failed
+            }
+        });
+    } else {
+        //TODO Redirect To An Error Page
+    }
+
+    /**
+     * Bookmark A Movie On Click Of 'save' Button
+     */
+    $(document).on('click', 'a.save', function(event) {
+        event.preventDefault(); // Deactivate The href Value
+        var obj = { email: getUrlParameter('email'), movieId: $(this).data('value') };
+        $.ajax({
+            type: "POST",
+            url: "/movies/insertBookmark",
+            contentType: 'application/json',
+            data: JSON.stringify(obj),
+            success: function(result) {
+                if(result) { // Bookmark Saved
+                    //TODO Message
+                    console.log("Saved");
+                    //$("<span>Bookmark Saved.</span>").insertAfter($(this));
+                } else {
+                    //TODO Message
+                    console.log("Already Exists");
+                    //$("<span>Bookmark Already Exists.</span>").insertAfter($(this));
+                }
+            },
+            error: function() {
+                //TODO Ajax Failed
+            }
+        });
+    });
 
 
 });

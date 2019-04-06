@@ -13,6 +13,8 @@ public interface MovieDao {
 
    int insertBookmark(String email, String movieId);
 
+   boolean bookmarkExists(String email, String movieId);
+
    List<String> getUserBookmarks(String email);
 
    boolean login(String email, String password);

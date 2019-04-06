@@ -1,5 +1,6 @@
 package gr.aueb.moviesite.service;
 
+import gr.aueb.moviesite.model.Bookmark;
 import gr.aueb.moviesite.model.UserBookmarks;
 import gr.aueb.moviesite.model.User;
 import gr.aueb.moviesite.persistence.MovieDao;
@@ -43,14 +44,25 @@ public class MoviesServiceImpl implements MoviesService {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void insertBookmark(final String email, final String movieId) {
-        if(StringUtils.trimToNull(email) != null && StringUtils.trimToNull(movieId) != null) {
-            movieDao.insertBookmark(email, movieId);
+    public boolean insertBookmark(Bookmark bookmark) {
+        boolean result = false;
+        if(StringUtils.trimToNull(bookmark.getEmail())!=null && StringUtils.trimToNull(bookmark.getMovieId())!=null) {
+            if(!bookmarkExists(bookmark)) {
+                movieDao.insertBookmark(bookmark.getEmail(), bookmark.getMovieId());
+                result = true; // Persisted
+            }
         }
+        return result;
+    }
+
+    @Override
+    public boolean bookmarkExists(Bookmark bookmark) {
+        boolean result = false;
+        if(StringUtils.trimToNull(bookmark.getEmail())!=null && StringUtils.trimToNull(bookmark.getMovieId())!=null) {
+            result = movieDao.bookmarkExists(bookmark.getEmail(), bookmark.getMovieId());
+        }
+        return result;
     }
 
     /**

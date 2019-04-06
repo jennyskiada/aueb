@@ -68,6 +68,17 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
+    public boolean bookmarkExists(String email, String movieId) {
+        int result = 0; // The Default Result
+        try {
+            result = jdbcTemplate.queryForObject(getSQLQuery("BOOKMARK_EXISTS"), new Object[] { email, movieId }, Integer.class);
+        } catch (Exception exception) {
+            //log.error("Exception", exception);
+        }
+        return result > 0;
+    }
+
+    @Override
     public List<String> getUserBookmarks(final String email) {
         //log.info("getUserBookmarks() Invoked For GUID = {}", email);
         List<String> result = new ArrayList<>();

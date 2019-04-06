@@ -3,19 +3,10 @@ package gr.aueb.moviesite.model;
 /**
  * Bookmark Object
  */
-public class Bookmark{
+public class Bookmark {
 
-    private Long userId;
     private String email;
     private String movieId;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 
     public String getEmail() {
         return email;

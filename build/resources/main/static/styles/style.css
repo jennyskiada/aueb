@@ -89,13 +89,18 @@ input#movie {
   line-height: 18px;
 }
 
-#movieresults  a.more {
-  background-color: red;
-  padding: 5px 10px;
-  border-radius: 50px;
-  font-size: 10px;
-  color: white;
-  text-decoration: none;
+#movieresults  a.more, #movieresults  a.save {
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 10px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+#movieresults  a.save {
+    background-color: blue;
 }
 
 p, li, form {

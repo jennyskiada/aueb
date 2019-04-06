@@ -39,11 +39,27 @@ public class MoviesRestController {
         moviesService.insertUser(user);
     }
 
+    /**
+     * Used To Get User Info And Bookmarks Given An Email
+     * @param email User's Email
+     * @return UserBookmarks Object
+     */
     @GetMapping(value = "userBookmarks", produces = "application/json")
     public UserBookmarks userBookmarks(@RequestParam(value = "email") String email) {
         //log.info("getBookmarks() Endpoint Invoked For Email = {}.", email);
         return moviesService.getUserBookmarksByEmail(email);
     }
+
+    /**
+     * Used To Save A User's Bookmark If It Does Not Already Exist
+     * @param bookmark Bookmark Object
+     */
+    @PostMapping(value = "insertBookmark", produces = "application/json")
+    public boolean insertBookmark(@RequestBody Bookmark bookmark) {
+        //log.info("userExists() Endpoint Invoked For Email = {}.", bookmark.getEmail());
+        return moviesService.insertBookmark(bookmark);
+    }
+
 
 
 
@@ -53,13 +69,6 @@ public class MoviesRestController {
         return moviesService.loginUser(user);
     }
 
-
-
-    @PostMapping(value = "bookmark", produces = "application/json")
-    public void insertBookmark(@RequestBody Bookmark bookmark) {
-        //log.info("userExists() Endpoint Invoked For Email = {}.", bookmark.getEmail());
-        moviesService.insertBookmark(bookmark.getEmail(), bookmark.getMovieId());
-    }
 
 
 }
