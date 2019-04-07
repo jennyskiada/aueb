@@ -1,3 +1,6 @@
+-- CREATE DATABASE IF NOT EXISTS moviedb;
+-- USE moviedb;
+
 CREATE TABLE IF NOT EXISTS TBL_USER (
   id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(120) NOT NULL,
